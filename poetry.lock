@@ -105,39 +105,31 @@ colorama = "*"
 
 [[package]]
 category = "main"
-description = ""
+description = "A collection of cogs and extensions for discord.py bots."
 name = "commanderbot-ext"
 optional = true
-python-versions = "^3.8"
-version = "0.1.0"
+python-versions = ">=3.8,<4.0"
+version = "0.2.0"
 
 [package.dependencies]
-commanderbot-lib = "tag v0.1.0"
-"discord.py" = "^1.4.1"
+commanderbot-lib = ">=0.1.0,<0.2.0"
+"discord.py" = ">=1.4.1,<2.0.0"
 
-[package.source]
-reference = "a0afa931045acf542ed031198363d08702748868"
-type = "git"
-url = "https://github.com/CommanderBot-Dev/commanderbot-ext.git"
 [[package]]
 category = "main"
-description = ""
+description = "A library of utilities for discord.py bots."
 name = "commanderbot-lib"
 optional = false
-python-versions = "^3.8"
+python-versions = ">=3.8,<4.0"
 version = "0.1.0"
 
 [package.dependencies]
-"discord.py" = "^1.4.1"
+"discord.py" = ">=1.4.1,<2.0.0"
 
 [package.extras]
-log-colors = ["colorama (^0.4.3)", "colorlog (^4.2.1)"]
-yaml = ["pyyaml (^5.3.1)"]
+log-colors = ["colorama (>=0.4.3,<0.5.0)", "colorlog (>=4.2.1,<5.0.0)"]
+yaml = ["pyyaml (>=5.3.1,<6.0.0)"]
 
-[package.source]
-reference = "0ee4cb55f711535bfab953b9c3bfd348a4f0be4a"
-type = "git"
-url = "https://github.com/CommanderBot-Dev/commanderbot-lib.git"
 [[package]]
 category = "main"
 description = "A Python wrapper for the Discord API"
@@ -243,7 +235,7 @@ commanderbot-ext = ["commanderbot-ext"]
 "commanderbot-lib[yaml]" = ["pyyaml"]
 
 [metadata]
-content-hash = "ddcb0e3d7f8b39cee848e004b77075cf7aafc1addfbcad75eebf238c7d5c8b26"
+content-hash = "c60d3f143140d82b05cce46afbb13f6a842fbfc2401c40e85663252654e1f46c"
 lock-version = "1.0"
 python-versions = "^3.8"
 
@@ -293,8 +285,14 @@ colorlog = [
     {file = "colorlog-4.2.1-py2.py3-none-any.whl", hash = "sha256:43597fd822ce705190fc997519342fdaaf44b9b47f896ece7aa153ed4b909c74"},
     {file = "colorlog-4.2.1.tar.gz", hash = "sha256:75e55822c3a3387d721579241e776de2cf089c9ef9528b1f09e8b04d403ad118"},
 ]
-commanderbot-ext = []
-commanderbot-lib = []
+commanderbot-ext = [
+    {file = "commanderbot-ext-0.2.0.tar.gz", hash = "sha256:676bb49054807deab7745b7d9640bed36d5a62f87d43fe6a470a755a5726b55c"},
+    {file = "commanderbot_ext-0.2.0-py3-none-any.whl", hash = "sha256:ad676851e866d1776e1ea99647133148e329fd0950abd653a928d82dad6f0ac2"},
+]
+commanderbot-lib = [
+    {file = "commanderbot-lib-0.1.0.tar.gz", hash = "sha256:e789c6fa6f64d62f24ef0969f244ca5f2442df0c8ab9c1cbbe49d7d26fcc4b31"},
+    {file = "commanderbot_lib-0.1.0-py3-none-any.whl", hash = "sha256:0cdbb4218f04bb61174d84a1a500ec726d9ad5ed207153c374cb391266aa8a5a"},
+]
 "discord.py" = [
     {file = "discord.py-1.4.1-py3-none-any.whl", hash = "sha256:98ea3096a3585c9c379209926f530808f5fcf4930928d8cfb579d2562d119570"},
     {file = "discord.py-1.4.1.tar.gz", hash = "sha256:f9decb3bfa94613d922376288617e6a6f969260923643e2897f4540c34793442"},

@@ -11,6 +11,10 @@ ARG_PARSER.add_argument(
     "--token",
     help="Bot token (prefer using the BOT_TOKEN environment variable)",
 )
+ARG_PARSER.add_argument(
+    "--tokenfile",
+    help="Bot token file (prefer using the BOT_TOKEN environment variable)",
+)
 ARG_PARSER.add_argument("--log", help="Log level", default="WARNING")
 ARGS = ARG_PARSER.parse_args()
 
@@ -34,20 +38,19 @@ LOG.info(f"Number of configuration keys: {len(CONFIG)}")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
 
 if not BOT_TOKEN:
-    BOT_TOKEN = ARGS.token
-    if BOT_TOKEN:
-        LOG.warning(
-            "Bot token provided via --token argument, instead of the BOT_TOKEN environment "
-            "variable.",
-        )
+    LOG.warning("Bot token provided in a form other than the BOT_TOKEN environment variable.")
+
+    if ARGS.token:
+        LOG.info("Using bot token provided as an argument.")
+        BOT_TOKEN = ARGS.token
+
+    elif ARGS.tokenfile:
+        LOG.info(f"Reading bot token from file: {ARGS.tokenfile}")
+        with open(os.path.abspath(ARGS.tokenfile)) as fp:
+            BOT_TOKEN = fp.read()
+
     else:
-        LOG.warning(
-            "No BOT_TOKEN environment variable set, and no --token argument provided.",
-        )
         BOT_TOKEN = input("Enter bot token: ")
-
-
-LOG.info("Bot token: " + BOT_TOKEN[:4] + "*" * (len(BOT_TOKEN) - 4))
 
 LOG.warning("Running bot...")
 

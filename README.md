@@ -1,4 +1,4 @@
-# CommanderBot
+# CommanderBot CLI
 
 Command-line interface for running an instance of CommanderBot.
 

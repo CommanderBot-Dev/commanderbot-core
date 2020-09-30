@@ -2,6 +2,9 @@
 
 Command-line interface for running an instance of CommanderBot.
 
+[![package-badge]](https://pypi.python.org/pypi/commanderbot/)
+[![version-badge]](https://pypi.python.org/pypi/commanderbot/)
+
 ## Running your bot
 
 You can run your own bot without writing any code.
@@ -56,3 +59,6 @@ The current set of configuration options is limited. Following is an example con
   ]
 }
 ```
+
+[package-badge]: https://img.shields.io/pypi/v/commanderbot.svg
+[version-badge]: https://img.shields.io/pypi/pyversions/commanderbot.svg

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "commanderbot"
-version = "0.5.0-alpha.0"
+version = "0.5.0"
 description = "Command-line interface for running an instance of CommanderBot."
 authors = ["Arcensoth <arcensoth@gmail.com>"]
 license = "MIT"

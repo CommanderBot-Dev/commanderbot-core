@@ -25,6 +25,9 @@ colors = ["colorama", "colorlog"]
 yaml = ["pyyaml"]
 ext = ["commanderbot-ext"]
 
+[tool.black]
+line-length = 100
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

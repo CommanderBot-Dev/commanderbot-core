@@ -38,7 +38,9 @@ LOG.info(f"Number of configuration keys: {len(CONFIG)}")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", None)
 
 if not BOT_TOKEN:
-    LOG.warning("Bot token provided in a form other than the BOT_TOKEN environment variable.")
+    LOG.warning(
+        "Bot token provided in a form other than the BOT_TOKEN environment variable."
+    )
 
     if ARGS.token:
         LOG.info("Using bot token provided as an argument.")

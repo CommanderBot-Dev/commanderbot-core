@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Merged some core utilities from the old commanderbot-lib repository
+
 ## [0.6.0] - 2021-01-08
 
 ### Changed

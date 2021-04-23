@@ -1,6 +1,6 @@
 # CommanderBot CLI
 
-Command-line interface for running an instance of CommanderBot.
+A simple wrapper and CLI bootstrap for discord.py bots.
 
 [![package-badge]](https://pypi.python.org/pypi/commanderbot/)
 [![version-badge]](https://pypi.python.org/pypi/commanderbot/)

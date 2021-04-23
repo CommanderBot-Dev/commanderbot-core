@@ -1,29 +1,25 @@
 [tool.poetry]
 name = "commanderbot"
 version = "0.6.0"
-description = "Command-line interface for running an instance of CommanderBot."
+description = "A simple wrapper and CLI bootstrap for discord.py bots."
 authors = ["Arcensoth <arcensoth@gmail.com>"]
 license = "MIT"
 readme = 'README.md'
-repository = "https://github.com/CommanderBot-Dev/commanderbot-cli"
-homepage = "https://github.com/CommanderBot-Dev/commanderbot-cli"
+repository = "https://github.com/CommanderBot-Dev/commanderbot-core"
+homepage = "https://github.com/CommanderBot-Dev/commanderbot-core"
 keywords = ['discord', 'bot']
 
 [tool.poetry.dependencies]
 python = "^3.8"
-commanderbot-lib = "^0.6.0"
-    colorama = {version = "^0.4.3", optional = true}
-    colorlog = {version = "^4.2.1", optional = true}
-    pyyaml = {version = "^5.3.1", optional = true}
-commanderbot-ext = {version = "^0.6.0", optional = true}
+"discord.py" = "^1.7.1"
+colorama = {version = "^0.4.3", optional = true}
+colorlog = {version = "^4.2.1", optional = true}
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
 
 [tool.poetry.extras]
 colors = ["colorama", "colorlog"]
-yaml = ["pyyaml"]
-ext = ["commanderbot-ext"]
 
 [tool.isort]
 profile = "black"

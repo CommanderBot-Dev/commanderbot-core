@@ -24,6 +24,9 @@ colors = ["colorama", "colorlog"]
 [tool.isort]
 profile = "black"
 
+[tool.pyright]
+typeCheckingMode = "basic"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

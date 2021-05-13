@@ -100,7 +100,7 @@ name = "colorlog"
 version = "4.8.0"
 description = "Log formatting with colors!"
 category = "main"
-optional = true
+optional = false
 python-versions = "*"
 
 [package.dependencies]
@@ -213,13 +213,10 @@ python-versions = ">=3.6"
 idna = ">=2.0"
 multidict = ">=4.0"
 
-[extras]
-colors = ["colorama", "colorlog"]
-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4864e6c7b634a8c56deebdee841b36e01229b48925fe2223e16df75c1047ec79"
+content-hash = "1474561b5810031cba6f5429b2c1f9ff390666a04211f4a93a4efcf2404e249d"
 
 [metadata.files]
 aiohttp = [

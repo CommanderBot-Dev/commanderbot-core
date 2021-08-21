@@ -61,7 +61,7 @@ def run():
 
     log.warning("Running bot...")
 
-    bot = CommanderBot(config)
+    bot = CommanderBot(**config)
 
     bot.run(bot_token)
 

@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from logging import Logger, getLogger
 from typing import Any, Dict, List, Optional, Union
 
+from discord import Intents
 from discord.ext.commands import Context
 from discord.ext.commands.errors import (
     BadArgument,
@@ -42,22 +43,43 @@ class ConfiguredExtension:
 
 
 class CommanderBot(CommanderBotBase):
-    def __init__(self, config: Dict[str, Any]):
-        # Remove options that don't belong to the discord.py Bot base.
-        extensions_data = config.get("extensions")
+    def __init__(self, *args, **kwargs):
+        # Account for options that don't belong to the discord.py Bot base.
+        extensions_data = kwargs.pop("extensions", None)
+        intents_data = kwargs.pop("intents", None)
+        # Construct intents object.
+        intents = self.make_intents(intents_data)
         # Initialize discord.py Bot base.
-        super().__init__(**config)
+        super().__init__(*args, **kwargs, intents=intents)
         # Grab our own logger instance.
         self.log: Logger = getLogger("CommanderBot")
         # Remember when we started and the last time we connected.
         self._started_at: datetime = datetime.utcnow()
         self._connected_since: Optional[datetime] = None
+        # Warn about a lack of configured intents.
+        if intents_data is None:
+            self.log.warning(
+                f"No intents configured; using default flags: {self.intents.value}"
+            )
+        else:
+            self.log.info(f"Using intents flags: {self.intents.value}")
         # Configure extensions.
         self.configured_extensions: Dict[str, ConfiguredExtension] = {}
         if extensions_data:
             self._configure_extensions(extensions_data)
         else:
             self.log.warning("No extensions configured.")
+
+    @classmethod
+    def make_intents(cls, data) -> Intents:
+        if data is None:
+            return Intents.default()
+        elif isinstance(data, str):
+            if intents_factory := getattr(Intents, data, None):
+                return intents_factory()
+        elif isinstance(data, dict):
+            return Intents(**data)
+        raise ValueError(f"Invalid intents: {data}")
 
     def _configure_extensions(self, extensions_data: list):
         if not isinstance(extensions_data, list):

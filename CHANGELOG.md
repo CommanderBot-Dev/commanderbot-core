@@ -62,7 +62,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Implemented a basic command-line interface for launching a bot instance
 
-[unreleased]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.7.0...HEAD
+[unreleased]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/CommanderBot-Dev/commanderbot-cli/compare/v0.4.0...v0.5.0

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "commanderbot"
-version = "0.9.0"
+version = "0.10.0a1"
 description = "A simple wrapper and CLI bootstrap for discord.py bots."
 authors = ["Arcensoth <arcensoth@gmail.com>"]
 license = "MIT"

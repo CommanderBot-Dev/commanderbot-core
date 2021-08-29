@@ -3,20 +3,19 @@ from datetime import datetime, timedelta
 from logging import Logger, getLogger
 from typing import Any, Dict, List, Optional, Union
 
-from discord import Intents
+from discord import AllowedMentions, Intents, Message
 from discord.ext.commands import Context
 from discord.ext.commands.errors import (
-    BadArgument,
     BotMissingPermissions,
     CheckFailure,
     CommandNotFound,
     MissingPermissions,
-    MissingRequiredArgument,
     NoPrivateMessage,
-    TooManyArguments,
+    UserInputError,
 )
 
 from commanderbot.core.bot.abc.commander_bot_base import CommanderBotBase
+from commanderbot.core.responsive_exception import ResponsiveException
 
 __all__ = (
     "ConfiguredExtension",
@@ -110,6 +109,13 @@ class CommanderBot(CommanderBotBase):
 
         self.log.info(f"Finished loading extensions.")
 
+    async def reply(self, ctx: Context, content: str) -> Message:
+        """Wraps `Context.reply()` with all mentions disabled."""
+        return await ctx.message.reply(
+            content,
+            allowed_mentions=AllowedMentions.none(),
+        )
+
     # @implements CommanderBotBase
     @property
     def started_at(self) -> datetime:
@@ -142,22 +148,25 @@ class CommanderBot(CommanderBotBase):
 
     # @overrides Bot
     async def on_command_error(self, ctx: Context, ex: Exception):
-        if isinstance(ex, CommandNotFound):
-            pass
-        elif isinstance(ex, (MissingRequiredArgument, TooManyArguments, BadArgument)):
-            await ctx.reply(f"🤢 Bad input: {ex}")
-            await ctx.send_help(ctx.command)
-        elif isinstance(ex, MissingPermissions):
-            await ctx.reply(f"😠 You don't have permission to do that.")
-        elif isinstance(ex, BotMissingPermissions):
-            await ctx.reply(f"😳 I don't have permission to do that.")
-        elif isinstance(ex, NoPrivateMessage):
-            await ctx.reply(f"🤐 You can't do that in a private message.")
-        elif isinstance(ex, CheckFailure):
-            await ctx.reply(f"🤔 You can't do that.")
-        else:
-            try:
-                raise ex
-            except:
-                self.log.exception(f"Ignoring exception in command: {ctx.command}")
-            await ctx.reply(f"🔥 Something went wrong trying to do that.")
+        match ex:
+            case CommandNotFound():
+                pass
+            case UserInputError():
+                await self.reply(ctx, f"😬 Bad input: {ex}")
+                await ctx.send_help(ctx.command)
+            case MissingPermissions():
+                await self.reply(ctx, f"😠 You don't have permission to do that.")
+            case BotMissingPermissions():
+                await self.reply(ctx, f"😳 I don't have permission to do that.")
+            case NoPrivateMessage():
+                await self.reply(ctx, f"🤐 You can't do that in a private message.")
+            case CheckFailure():
+                await self.reply(ctx, f"🤔 You can't do that.")
+            case ResponsiveException():
+                await ex.respond(ctx)
+            case _:
+                try:
+                    raise ex
+                except:
+                    self.log.exception(f"Ignoring exception in command: {ctx.command}")
+                await self.reply(ctx, f"🔥 Something went wrong trying to do that.")
